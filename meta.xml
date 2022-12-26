@@ -1,0 +1,6 @@
+<meta>
+    <info author="ImanEro" version="1.0.0" name="chat-log" description="Logs all the player messages in the game with nice UI" type="script" />
+    <script src="init_s.lua" type="server" />
+    <script src="save_msg_s.lua" type="server" />
+    <!--  -->
+</meta>
