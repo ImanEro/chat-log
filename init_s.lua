@@ -3,7 +3,7 @@ db = nil
 function dbStructure() 
     dbExec(db, [[CREATE TABLE IF NOT EXISTS chats (
         "id"	INTEGER NOT NULL UNIQUE,
-        "type"	INTEGER,
+        "type"	TEXT NOT NULL,
         "time"	TEXT NOT NULL,
         "player"	TEXT NOT NULL,
         "group"	TEXT NOT NULL,
@@ -14,7 +14,7 @@ function dbStructure()
     );]])
     dbExec(db, [[CREATE TABLE IF NOT EXISTS commands (
         "id"	INTEGER NOT NULL UNIQUE,
-        "type"	INTEGER,
+        "type"	TEXT NOT NULL,
         "time"	TEXT NOT NULL,
         "player"	TEXT NOT NULL,
         "group"	TEXT NOT NULL,

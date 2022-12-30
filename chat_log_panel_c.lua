@@ -27,6 +27,7 @@ addEventHandler("updateChatLog", localPlayer, updateChatLogList)
 function openPanel() 
     mainWindow = guiCreateWindow((screenWidth - mainWIndowWidth) / 2, (screenHieght - mainWindowHieght) / 2, mainWIndowWidth, mainWindowHieght, "Chat Log", false)
     logList = guiCreateGridList(paddingWidth, paddingHeight, (mainWIndowWidth * 0.7) - paddingWidth, mainWindowHieght - (paddingHeight * 2) , false, mainWindow)
+    limit = 50
     local players = getElementsByType("player")
     local authorLabel = guiCreateLabel(paddingWidth, mainWindowHieght - 30, mainWIndowWidth, 50, "© ImanEro", false, mainWindow)
     local searchButton = guiCreateButton(700, 480, 230, 35, "Search", false, mainWindow)
@@ -69,6 +70,7 @@ end
 function closePanel()
     destroyElement(mainWindow)
     showCursor(false)
+    show = true
 end
 
 -- Opens chat log ui wiht command
@@ -78,7 +80,6 @@ addCommandHandler("clog", function()
         show = false
     else
         closePanel()
-        show = true
     end
 end, true, false)
 
