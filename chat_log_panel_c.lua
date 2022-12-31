@@ -40,8 +40,8 @@ function openPanel()
     local idEdit = guiCreateEdit(740, 100, 45, 20, "", false, mainWindow)
     local playerLabel = guiCreateLabel(700, 130, 230, 35, "Player :", false, mainWindow)
     local playerComboBox = guiCreateComboBox(750, 130, 100, 250, "", false, mainWindow)
-    local groupLabel = guiCreateLabel(700, 160, 230, 35, "Group :", false, mainWindow)
-    local groupComboBox = guiCreateComboBox(750, 160, 100, 250, "", false, mainWindow)
+    local typeLabel = guiCreateLabel(700, 160, 230, 35, "Type :", false, mainWindow)
+    local typeComboBox = guiCreateComboBox(750, 160, 100, 250, "", false, mainWindow)
     
     -- Customization
     guiWindowSetMovable(mainWindow, false)
@@ -54,15 +54,20 @@ function openPanel()
     for _,player in pairs(players) do
        guiComboBoxAddItem(playerComboBox, getPlayerName(player))
     end
+    guiComboBoxAddItem(typeComboBox, "all")
+    guiComboBoxAddItem(typeComboBox, "chat")
+    guiComboBoxAddItem(typeComboBox, "command")    
+    guiComboBoxSetSelected(typeComboBox, 0)
 
     -- Events
     triggerServerEvent("fetchChatLog", resourceRoot, localPlayer, limit)
     addEventHandler("onClientGUIClick", searchButton, function()
         limit = tonumber(guiGetText(rowsEdit)) or nil
+        local type = guiComboBoxGetItemText(typeComboBox, guiComboBoxGetSelected(typeComboBox))
         local id = tonumber(guiGetText(idEdit)) or nil
         local playerName = guiComboBoxGetItemText(playerComboBox, guiComboBoxGetSelected(playerComboBox))
         if playerName == "" then playerName = nil end
-        triggerServerEvent("fetchChatLog", resourceRoot, localPlayer, limit, id, playerName)  
+        triggerServerEvent("fetchChatLog", resourceRoot, localPlayer, limit, type, id, playerName)  
     end, false)
     addEventHandler("onClientGUIClick", closeButton, function() closePanel()  end, false)
 end
@@ -82,6 +87,3 @@ addCommandHandler("clog", function()
         closePanel()
     end
 end, true, false)
-
---! Remove this before commit
-openPanel()
